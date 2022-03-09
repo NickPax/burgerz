@@ -9,42 +9,45 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import kotlinx.android.synthetic.main.example_item.view.*
+import com.nickpaxford.burgerbar.fragments.DetailFragment
 
-class UserAdapter(private val context: Context, val userInfo:UserInfo ) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
-    //val categoryImageURL = "http://10.0.2.2:8080/food-order/images/category/"
 
-    private lateinit var myListener: myOnItemClickListener
+class UserAdapter(private val context: Context, private val userInfo:UserInfo) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
 
-    interface myOnItemClickListener{
-        fun myOnItemClick(myPosition: Int)
-    }
+   // val categoryImageURL = "http://10.0.2.2:8080/food-order/images/category/"
 
-    fun mySetOnItemClickListener(listener: myOnItemClickListener){
-        myListener = listener
-    }
+//   private lateinit var myListener: myOnItemClickListener
+
+//    interface myOnItemClickListener{
+//        fun myOnItemClick(myPosition: Int)
+//    }
+
+//    fun mySetOnItemClickListener(listener: myOnItemClickListener){
+//        myListener = listener
+//    }
 
 
     private val categoryImageURL = "http://my-giddy-aunt.pl/food-order/images/category/"
 
-    class UserViewHolder(itemView: View, listener: myOnItemClickListener) : RecyclerView.ViewHolder(itemView) {
+    class UserViewHolder(itemView: View /*, listener: myOnItemClickListener */) : RecyclerView.ViewHolder(itemView) {
         val imageView: ImageView = itemView.findViewById(R.id.my_imageview)
         val userName: TextView = itemView.findViewById(R.id.my_text_view_1)
 
-        init{
-            itemView.setOnClickListener {
-                 listener.myOnItemClick(adapterPosition)
-            }
-
-        }
+//        init{
+//            itemView.setOnClickListener {
+//                 listener.myOnItemClick(adapterPosition)
+//            }
+//
+//        }
 
     }
 
+    // method is called by the recycler view - it returns an UserViewHolder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.food_layout,
             parent, false)
 
-        return UserViewHolder(itemView, myListener)
+        return UserViewHolder(itemView /*, myListener */)
     }
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
@@ -54,7 +57,11 @@ class UserAdapter(private val context: Context, val userInfo:UserInfo ) : Recycl
         holder.itemView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View?) {
                 val activity = v!!.context as AppCompatActivity
-              //  val demoFragment= DemoFragment()
+                var detailFragment = DetailFragment()
+                activity.supportFragmentManager.beginTransaction().replace(R.id.main_recyclerview, detailFragment)
+                    .addToBackStack(null)
+                  /*  .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE) */
+                    .commit()
             }
         })
     }
