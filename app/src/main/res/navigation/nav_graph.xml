@@ -12,12 +12,16 @@
         android:label="food_categories_fragment"
         tools:layout="@layout/food_categories_fragment" >
         <action
-            android:id="@+id/action_foodCategoriesFragment_to_myDetailFragment2"
-            app:destination="@id/myDetailFragment2" />
+            android:id="@+id/action_foodCategoriesFragment_to_foodsFragment"
+            app:destination="@id/foodsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/myDetailFragment2"
-        android:name="com.nickpaxford.burgerbar.fragments.MyDetailFragment"
-        android:label="my_detail_fragment"
-        tools:layout="@layout/my_detail_fragment" />
+        android:id="@+id/foodsFragment"
+        android:name="com.nickpaxford.burgerbar.fragments.FoodsFragment"
+        android:label="foods_fragment"
+        tools:layout="@layout/foods_fragment" >
+        <argument
+            android:name="categoryId"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -12,10 +12,9 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.google.gson.GsonBuilder
 import com.nickpaxford.burgerbar.R
-import com.nickpaxford.burgerbar.UserAdapter
-import com.nickpaxford.burgerbar.UserInfo
-import com.nickpaxford.burgerbar.UserInfoItem
-import com.nickpaxford.burgerbar.databinding.ActivityMainBinding
+import com.nickpaxford.burgerbar.FoodCategoryAdapter
+import com.nickpaxford.burgerbar.FoodCategories
+import com.nickpaxford.burgerbar.FoodCategoryItem
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.food_categories_fragment.*
 
@@ -27,8 +26,8 @@ class FoodCategoriesFragment : Fragment() {
 
     private lateinit var viewModel: FoodCategoriesViewModel
 
-    var userInfoItem = arrayOf<UserInfoItem>()
-    private val userInfo = UserInfo()
+    var foodCategoryItem = arrayOf<FoodCategoryItem>()
+    private val foodCategories = FoodCategories()
     private val url = "http://my-giddy-aunt.pl/food-order/np-index.php"
 
 
@@ -57,9 +56,9 @@ class FoodCategoriesFragment : Fragment() {
         val stringRequest= StringRequest(url, {
             val gsonBuilder= GsonBuilder()
             val gson = gsonBuilder.create()
-            userInfoItem = gson.fromJson(it,Array<UserInfoItem>::class.java)
-            userInfoItem.forEach {
-                userInfo.add(it)
+            foodCategoryItem = gson.fromJson(it,Array<FoodCategoryItem>::class.java)
+            foodCategoryItem.forEach {
+                foodCategories.add(it)
             }
 
             showFood()
@@ -72,8 +71,8 @@ class FoodCategoriesFragment : Fragment() {
         })
         val volleyQueue= Volley.newRequestQueue(activity)
 
-        if (userInfo != null){
-            userInfo.clear()
+        if (foodCategories != null){
+            foodCategories.clear()
         }
         volleyQueue.add(stringRequest)
     }
@@ -83,7 +82,7 @@ class FoodCategoriesFragment : Fragment() {
         recycler_view.layoutManager = GridLayoutManager(activity, 2)
         recycler_view.getContext()
         swipe_layout.isRefreshing = false
-        val adapter = UserAdapter(recycler_view.getContext(),userInfo)
+        val adapter = FoodCategoryAdapter(recycler_view.getContext(),foodCategories)
         recycler_view.adapter = adapter
 
     }
