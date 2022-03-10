@@ -19,10 +19,10 @@ import com.nickpaxford.burgerbar.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.food_categories_fragment.*
 
-class FoodCategoriesFragment : Fragment() {
+class MyDetailFragment : Fragment() {
 
     companion object {
-        fun newInstance() = FoodCategoriesFragment()
+        fun newInstance() = MyDetailFragment()
     }
 
     private lateinit var viewModel: FoodCategoriesViewModel
@@ -36,7 +36,7 @@ class FoodCategoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.food_categories_fragment, container, false)
+        return inflater.inflate(R.layout.my_detail_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

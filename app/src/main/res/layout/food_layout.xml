@@ -6,7 +6,7 @@
     app:cardCornerRadius="0dp"
     app:cardElevation="0dp"
     android:layout_margin="0dp"
-    app:cardBackgroundColor="@color/black">
+    app:cardBackgroundColor="@color/cardview_dark_background">
 
 
     <LinearLayout

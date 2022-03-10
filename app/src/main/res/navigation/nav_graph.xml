@@ -10,5 +10,14 @@
         android:id="@+id/foodCategoriesFragment"
         android:name="com.nickpaxford.burgerbar.fragments.FoodCategoriesFragment"
         android:label="food_categories_fragment"
-        tools:layout="@layout/food_categories_fragment" />
+        tools:layout="@layout/food_categories_fragment" >
+        <action
+            android:id="@+id/action_foodCategoriesFragment_to_myDetailFragment2"
+            app:destination="@id/myDetailFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/myDetailFragment2"
+        android:name="com.nickpaxford.burgerbar.fragments.MyDetailFragment"
+        android:label="my_detail_fragment"
+        tools:layout="@layout/my_detail_fragment" />
 </navigation>

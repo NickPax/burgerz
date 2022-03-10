@@ -7,9 +7,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.nickpaxford.burgerbar.fragments.DetailFragment
+import com.nickpaxford.burgerbar.fragments.FoodCategoriesFragment
+import com.nickpaxford.burgerbar.fragments.FoodCategoriesFragmentDirections
 
 
 class UserAdapter(private val context: Context, private val userInfo:UserInfo) : RecyclerView.Adapter<UserAdapter.UserViewHolder>() {
@@ -54,16 +61,25 @@ class UserAdapter(private val context: Context, private val userInfo:UserInfo) :
         val currentItem = userInfo[position]
         Glide.with(context).load(categoryImageURL + currentItem.image_name).into(holder.imageView)
         holder.userName.text = currentItem.title
-        holder.itemView.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View?) {
-                val activity = v!!.context as AppCompatActivity
-                var detailFragment = DetailFragment()
-                activity.supportFragmentManager.beginTransaction().replace(R.id.main_recyclerview, detailFragment)
-                    .addToBackStack(null)
-                  /*  .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE) */
-                    .commit()
-            }
-        })
+        var navController: NavController? = null
+        holder.itemView.setOnClickListener{
+            val action = FoodCategoriesFragmentDirections.actionFoodCategoriesFragmentToMyDetailFragment2()
+
+            navController = Navigation.findNavController(holder.itemView)
+            navController!!.navigate(action)
+        }
+
+//        (object : View.OnClickListener {
+//            override fun onClick(v: View?) {
+//                val activity = v!!.context as AppCompatActivity
+//                var detailFragment = DetailFragment()
+//                activity.supportFragmentManager.beginTransaction().replace(R.id.main_recyclerview, detailFragment)
+//                    .addToBackStack(null)
+//                  /*  .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE) */
+//                    .commit()
+//            }
+//        }
+//                )
     }
 
     override fun getItemCount() = userInfo.size
